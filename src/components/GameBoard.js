@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal";
+import "./GameBoard.scss";
 
 const initialGameBoard = [
   [null, null, null],
@@ -7,7 +8,14 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
+export default function GameBoard({
+  onSelectSquare,
+  activePlayerSymbol,
+  updateScores,
+  setActivePlayer,
+  player1Name,
+  player2Name,
+}) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
   const [winner, setWinner] = useState(null);
   const [isDraw, setIsDraw] = useState(false);
@@ -90,8 +98,12 @@ export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
     const gameWinner = checkWinner(updatedBoard);
     if (gameWinner) {
       setWinner(gameWinner);
+      updateScores(gameWinner); // Update the win count
+      setActivePlayer();
     } else if (checkDraw(updatedBoard)) {
       setIsDraw(true);
+      updateScores(null);
+      setActivePlayer();
     }
 
     setGameBoard(updatedBoard);
@@ -104,11 +116,14 @@ export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
     setIsDraw(false);
   }
 
+  const winnerName =
+    winner === "X" ? player1Name : winner === "O" ? player2Name : null;
+
   return (
     <div>
       {(winner || isDraw) && (
         <Modal
-          message={winner ? `Winner: ${winner} 🎉` : "It's a Tie! 🤝"}
+          message={winner ? `Winner: ${winnerName} 🎉` : "It's a Tie! 🤝"}
           onClose={resetGame}
         />
       )}

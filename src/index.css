@@ -1,11 +1,12 @@
 body {
   background: #192a32;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
+  font-family: comfortaa;
 }
 
 .game-title {
@@ -14,14 +15,145 @@ body {
   color: #a8bec9;
 }
 
-.players-wrapper {
+#players {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+#players li {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  border: 2px solid transparent;
+}
+
+#players.highlight-player li.active {
+  border-color: #f6e35a;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+#players.highlight-player li.active .player-name,
+#players.highlight-player li.active .player-symbol {
+  color: #f6e35a;
+}
+
+#players button {
+  width: 3rem;
+  border: none;
+  background: none;
+  color: #c3ba78;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.5rem 0.25rem 0.25rem 0.25rem;
+  text-align: center;
+}
+
+#players button:hover {
+  color: #f8ca31;
+}
+
+.player {
+  border: 2px solid transparent;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.player-name {
+  display: inline-block;
+  width: 10rem;
+  font-size: 1rem;
+  color: #e1dec7;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.player input {
+  font: inherit;
+  font-size: 1rem;
+  width: 10rem;
+  border: none;
+  padding: 0.5rem;
+  animation: pulse-text 2s infinite;
+  background-color: #46432f;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.player-symbol {
+  margin-left: 1rem;
+  font-size: 1rem;
+  color: #e1dec7;
 }
 
 ol,
 li {
   list-style-type: none;
+}
+
+#summaries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 0;
+  flex-direction: row;
+}
+
+#summaries ol {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+#summaries .info-box {
+  width: 6rem;
+  height: 3rem;
+  border: none;
+  background: #1f3540;
+  box-shadow: 0px 10px 0px 0px rgba(16, 33, 41, 0.62);
+  flex-direction: column;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.info-box.first-player-wins {
+  background-color: #31c4be !important;
+}
+
+.info-box.ties {
+  background-color: #a8bec9 !important;
+}
+
+.info-box.second-player-wins {
+  background-color: #f2b237 !important;
+}
+
+.wins-text {
+  margin-bottom: 0;
+}
+
+.wins-number {
+  margin-top: 0.5em;
 }
 
 code {
